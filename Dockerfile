@@ -1,4 +1,4 @@
-#Dockerfile para la creación de apache2 + php + otracosa
+#Dockerfile para la creación de apache2 + php + mysql
 
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
