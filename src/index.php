@@ -1,11 +1,23 @@
-<?php
-require_once './php/create_schema.php';
-echo 'Hello World!!! I\'m Francisco A Domínguez Iceta';
-$schema = $GLOBALS["schema"];
-
-    if($schema) {
-        echo "<br>tablas creadas";
-    } else{
-        echo "<br>tablas no creadas";
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Agenda</title>
+    <?php
+    session_start();
+    require_once './php/create_schema.php';
+    $schema = $GLOBALS["schema"];
+    if(!$schema)
+    {
+        header('Location: ./html/error.html');
     }
-?>
+    ?>
+</head>
+<body>
+    <h2>Hello world!!</h2>
+    <a href="php/create_person_form.php">create person</a>
+</body>
+</html>

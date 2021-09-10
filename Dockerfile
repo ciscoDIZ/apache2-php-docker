@@ -6,9 +6,10 @@ RUN apt-get update -y  && apt-get upgrade -y && apt-get install -y apache2 php p
      libapache2-mod-php php-curl php-common php-mbstring composer
 
 CMD ["apachectl","-D","FOREGROUND"]
-RUN a2enmod rewrite && echo '<?php phpinfo(); ?>' > /var/www/html/info.php
+ADD ./config/apache2/ /etc/apache2/
+RUN a2enmod rewrite && echo '<?php phpinfo(); ?>' > /var/www/html/info.php && rm /var/www/html/index.html
 EXPOSE 80 443
 
 COPY ./config/* /etc/php/7.4/apache2/
-COPY ./src/*.php /var/www/html/app/
-ADD ./src/php/* /var/www/html/app/php/
+ADD ./config/apache2/ /etc/apache2/
+ADD ./src/ /var/www/html/app/
