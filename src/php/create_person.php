@@ -1,5 +1,6 @@
 <?php
 require_once 'queries.php';
+require 'connection.php';
 $connection = $GLOBALS["connection"];
 $create_person = $GLOBALS["create_person"];
 $create_address = $GLOBALS["create_address"];
@@ -14,20 +15,22 @@ $number = $_POST["number"];
 $phone_name = $_POST["phone_name"];
 $phone_number = $_POST["phone_number"];
 
+
+
 if($person_name && $surname)
 {
-    $connection->query($create_person($person_name, $surname, $age));
+    mysqli_query($connection ,$create_person($person_name, $surname, $age));
     if ($address && $number){
-        $connection->query($create_address($address, $number));
-        $connection->query($create_addresses_people($person_name,$surname, $address, $number, $address_name));
-        echo $create_addresses_people($person_name,$surname, $address, $number, $address_name);
+        mysqli_query($connection, $create_address($address, $number));
+        mysqli_query($connection, $create_addresses_people($person_name,$surname, $address, $number, $address_name));
     }
     if($phone_name && $phone_number){
-        $connection->query($create_phone($phone_name, $phone_number, $person_name,$surname));
+        mysqli_query($connection, $create_phone($phone_name, $phone_number, $person_name,$surname));
     }
     header("Location: ../index.php");
 } else{
     header("Location: ../html/error.html");
 }
+require 'close_connection.php';
 exit();
 

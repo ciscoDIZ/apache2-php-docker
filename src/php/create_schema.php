@@ -16,7 +16,9 @@ $query = "  create table if not exists people(
                 constraint phones_pk primary key (name, number),
                 constraint people_phone_pk 
                     foreign key (person_name, person_surname) 
-                        references people (name, surname)
+                        references people (name, surname) 
+                        on update cascade 
+                        on delete cascade 
             );
 
             create table if not exists addresses(
@@ -35,10 +37,15 @@ $query = "  create table if not exists people(
                     primary key (person_name, address_address,  address_number),
                 constraint addresses_people_people_fk 
                     foreign key (person_name, person_surname) 
-                        references people (name, surname),
+                        references people (name, surname) 
+                        on update cascade 
+                        on delete cascade,
                 constraint addresses_people_addresses_fk 
                     foreign key (address_address, address_number)
                         references addresses (address, number) 
+                        on update cascade 
+                        on delete cascade
             )";
 global $schema;
-$schema = $connection->multi_query($query);
+$schema = mysqli_multi_query($connection, $query);
+require 'close_connection.php';

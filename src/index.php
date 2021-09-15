@@ -9,6 +9,7 @@
     <?php
     session_start();
     require_once './php/create_schema.php';
+    require_once './php/get_people.php';
     $schema = $GLOBALS["schema"];
     if(!$schema)
     {
@@ -17,7 +18,12 @@
     ?>
 </head>
 <body>
-    <h2>Hello world!!</h2>
+    <h2>Agenda</h2>
     <a href="php/create_person_form.php">create person</a>
+    <?php
+        $get_people_list = $GLOBALS['get_people_list'];
+        echo $get_people_list();
+    ?>
+
 </body>
 </html>

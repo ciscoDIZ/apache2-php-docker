@@ -10,6 +10,6 @@ ADD ./config/apache2/ /etc/apache2/
 RUN a2enmod rewrite && echo '<?php phpinfo(); ?>' > /var/www/html/info.php && rm /var/www/html/index.html
 EXPOSE 80 443
 
-COPY ./config/* /etc/php/7.4/apache2/
-ADD ./config/apache2/ /etc/apache2/
-ADD ./src/ /var/www/html/app/
+COPY config/php/php.ini /etc/php/7.4/apache2/
+ADD config/apache2/ /etc/apache2/
+ADD src/ /var/www/html/
